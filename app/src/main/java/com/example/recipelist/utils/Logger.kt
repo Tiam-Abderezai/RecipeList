@@ -46,6 +46,7 @@ object Logger {
 
     fun logd(tag: String, msg: String?) = GlobalScope.launch(Dispatchers.Main) {
         val log = LogModel(tag, LogLevel.DEBUG, msg ?: "null")
+        Timber.tag(tag).d(msg ?: "null")
         if (currentLogLevel >= LogLevel.DEBUG) {
             Timber.tag(tag).d(msg ?: "null")
         }

@@ -13,6 +13,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         supportActionBar?.hide()
-        Logger.logd(TAG_ACT_MAIN, "onCreate")
+        Log.d(TAG_ACT_MAIN, "onCreate: ")
+//        Logger.logd(TAG_ACT_MAIN, "onCreate")
     }
 }

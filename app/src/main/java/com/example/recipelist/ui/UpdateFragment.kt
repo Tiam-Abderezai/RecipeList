@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextUtils
+import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import android.widget.Toast
@@ -45,7 +46,8 @@ class UpdateFragment : Fragment() {
 
         setHasOptionsMenu(true)
 
-        Logger.logd(TAG_FRAG_UPDATE, "onCreateView")
+        Log.d(TAG_FRAG_ADD, "onCreateView: ")
+//        Logger.logd(TAG_FRAG_UPDATE, "onCreateView")
 
         return binding.root
     }

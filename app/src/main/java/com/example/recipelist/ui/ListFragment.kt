@@ -48,8 +48,8 @@ class ListFragment : Fragment() {
 
         // Add menu
         setHasOptionsMenu(true)
-
-        Logger.logd(TAG_FRAG_LIST, "onCreateView")
+        Log.d(TAG_FRAG_LIST, "onCreateView: ")
+//        Logger.logd(TAG_FRAG_LIST, "onCreateView")
 
         return binding.root
     }

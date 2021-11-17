@@ -3,6 +3,7 @@ package com.example.recipelist.ui
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextUtils
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -38,9 +39,10 @@ class AddFragment : Fragment() {
         binding.addBtn.setOnClickListener {
             insertDataToDatabase()
         }
-        Logger.logd(TAG_FRAG_ADD, "onCreateView")
+        Log.d(TAG_FRAG_ADD, "onCreateView: ")
+//        Logger.logd(TAG_FRAG_ADD, "onCreateView")
 
-        return view
+        return binding.root
     }
 
     private fun insertDataToDatabase() {
