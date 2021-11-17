@@ -5,18 +5,19 @@ import android.os.Bundle
 import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.roomdbkotlin.R
+import com.example.recipelist.ui.adapter.ListAdapter
+import com.example.recipelist.viewmodel.RecipeViewModel
+import com.example.recipelist.R
 import kotlinx.android.synthetic.main.fragment_list.view.*
-import com.example.roomdbkotlin.viewmodel.RecipeViewModel
-
 
 class ListFragment : Fragment() {
 
-    private lateinit var mRecipeViewModel: RecipeViewModel
+    private val viewModel: RecipeViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,10 +34,10 @@ class ListFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
         // RecipeViewModel
-        mRecipeViewModel = ViewModelProvider(this).get(RecipeViewModel::class.java)
-        mRecipeViewModel.readAllData.observe(viewLifecycleOwner, Observer { Recipe ->
-            adapter.setData(Recipe)
-        })
+//        mRecipeViewModel = ViewModelProvider(this).get(RecipeViewModel::class.java)
+//        mRecipeViewModel.readAllData.observe(viewLifecycleOwner, Observer { Recipe ->
+//            adapter.setData(Recipe)
+//        })
 
         view.floatingActionButton.setOnClickListener {
             findNavController().navigate(R.id.action_listFragment_to_addFragment)
@@ -63,7 +64,7 @@ class ListFragment : Fragment() {
     private fun deleteAllRecipes() {
         val builder = AlertDialog.Builder(requireContext())
         builder.setPositiveButton("Yes") { _, _ ->
-            mRecipeViewModel.deleteAllRecipe()
+//            mRecipeViewModel.deleteAllRecipe()
             Toast.makeText(
                 requireContext(),
                 "Successfully removed everything",

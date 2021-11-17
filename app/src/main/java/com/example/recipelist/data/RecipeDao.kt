@@ -1,4 +1,4 @@
-package com.example.roomdbkotlin.data
+package com.example.recipelist.data
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
@@ -6,13 +6,13 @@ import com.example.recipelist.data.model.Recipe
 @Dao
 interface RecipeDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun addRecipe(recipe: Recipe)
+    suspend fun addRecipe(Recipe: Recipe)
 
     @Update
-    suspend fun updateRecipe(recipe: Recipe)
+    suspend fun updateRecipe(Recipe: Recipe)
 
     @Delete
-    suspend fun deleteRecipe (recipe: Recipe)
+    suspend fun deleteRecipe (Recipe: Recipe)
 
     @Query("DELETE FROM Recipe_table")
     suspend fun deleteAllRecipes()

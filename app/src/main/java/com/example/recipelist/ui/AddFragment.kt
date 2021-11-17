@@ -10,9 +10,9 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.example.roomdbkotlin.R
-import com.example.roomdbkotlin.model.Recipe
-import com.example.roomdbkotlin.viewmodel.RecipeViewModel
+import com.example.recipelist.R
+import com.example.recipelist.data.model.Recipe
+import com.example.recipelist.viewmodel.RecipeViewModel
 import kotlinx.android.synthetic.main.fragment_add.*
 import kotlinx.android.synthetic.main.fragment_add.view.*
 

@@ -2,23 +2,23 @@ package com.example.recipelist.data.repo
 
 import androidx.lifecycle.LiveData
 import com.example.recipelist.data.model.Recipe
-import com.example.roomdbkotlin.data.RecipeDao
+import com.example.recipelist.data.RecipeDao
 
-class RecipeRepository(private val recipeDao: RecipeDao) {
-    val readAllData: LiveData<List<Recipe>> = recipeDao.readAllData()
-    suspend fun addRecipe(recipe: Recipe) {
-        recipeDao.addRecipe(recipe)
+class RecipeRepository(private val RecipeDao: RecipeDao) {
+    val readAllData: LiveData<List<Recipe>> = RecipeDao.readAllData()
+    suspend fun addRecipe(Recipe: Recipe) {
+        RecipeDao.addRecipe(Recipe)
     }
 
-    suspend fun updateRecipe(recipe: Recipe) {
-        recipeDao.updateRecipe(recipe)
+    suspend fun updateRecipe(Recipe: Recipe) {
+        RecipeDao.updateRecipe(Recipe)
     }
 
-    suspend fun deleteRecipe(recipe: Recipe) {
-        recipeDao.deleteRecipe(recipe)
+    suspend fun deleteRecipe(Recipe: Recipe) {
+        RecipeDao.deleteRecipe(Recipe)
     }
 
     suspend fun deleteAllRecipes() {
-        recipeDao.deleteAllRecipes()
+        RecipeDao.deleteAllRecipes()
     }
 }
