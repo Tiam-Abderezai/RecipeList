@@ -8,11 +8,12 @@ import com.example.recipelist.data.model.Recipe
 import com.example.recipelist.data.repo.RecipeRepository
 import com.example.recipelist.data.RecipeDatabase
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
 class RecipeViewModel(application: Application) : AndroidViewModel(application) {
 
-    val readAllData: LiveData<List<Recipe>>
+    val readAllData: Flow<List<Recipe>>
     private val repository: RecipeRepository
 
     init {

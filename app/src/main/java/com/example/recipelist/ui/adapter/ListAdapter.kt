@@ -8,12 +8,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.recipelist.R
 import com.example.recipelist.ui.ListFragmentDirections
 import com.example.recipelist.data.model.Recipe
-import kotlinx.android.synthetic.main.recipe_item.view.*
 
 
 class ListAdapter : RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
 
-    private var RecipeList = emptyList<Recipe>()
+    private var recipeList = emptyList<Recipe>()
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {}
 
@@ -24,15 +23,15 @@ class ListAdapter : RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
     }
 
     override fun getItemCount(): Int {
-        return RecipeList.size
+        return recipeList.size
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val currentItem = RecipeList[position]
-        holder.itemView.id_txt.text = currentItem.id.toString()
-        holder.itemView.firstName_txt.text = currentItem.firstName
-        holder.itemView.lastName_txt.text = currentItem.lastName
-        holder.itemView.age_txt.text = currentItem.age.toString()
+        val currentItem = recipeList[position]
+//        holder.itemView.id_txt.text = currentItem.id.toString()
+//        holder.itemView.firstName_txt.text = currentItem.firstName
+//        holder.itemView.lastName_txt.text = currentItem.lastName
+//        holder.itemView.age_txt.text = currentItem.age.toString()
 
 //        holder.itemView.rowLayout.setOnClickListener {
 //            val action = ListFragmentDirections.actionListFragmentToUpdateFragment(currentItem)
@@ -41,7 +40,7 @@ class ListAdapter : RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
     }
 
     fun setData(Recipe: List<Recipe>) {
-        this.RecipeList = Recipe
+        this.recipeList = Recipe
         notifyDataSetChanged()
     }
 }

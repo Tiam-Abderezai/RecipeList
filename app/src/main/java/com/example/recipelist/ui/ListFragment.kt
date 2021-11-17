@@ -2,52 +2,58 @@ package com.example.recipelist.ui
 
 import android.app.AlertDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.recipelist.ui.adapter.ListAdapter
 import com.example.recipelist.viewmodel.RecipeViewModel
 import com.example.recipelist.R
-import kotlinx.android.synthetic.main.fragment_list.view.*
+import com.example.recipelist.data.model.Recipe
+import com.example.recipelist.databinding.FragmentListBinding
+import kotlinx.coroutines.flow.map
 
 class ListFragment : Fragment() {
 
+    private lateinit var binding: FragmentListBinding
     private val viewModel: RecipeViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_list, container, false)
-
-        // RecyclerView
-
-        val adapter = ListAdapter()
-        val recyclerView = view.recyclerView
-        recyclerView.adapter = adapter
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
-
+        binding = FragmentListBinding.inflate(inflater, container, false)
+        binding.recyclerView.apply {
+            adapter = ListAdapter()
+            layoutManager = LinearLayoutManager(requireContext())
+        }
         // RecipeViewModel
 //        mRecipeViewModel = ViewModelProvider(this).get(RecipeViewModel::class.java)
 //        mRecipeViewModel.readAllData.observe(viewLifecycleOwner, Observer { Recipe ->
 //            adapter.setData(Recipe)
 //        })
 
-        view.floatingActionButton.setOnClickListener {
-            findNavController().navigate(R.id.action_listFragment_to_addFragment)
-        }
 
         // Add menu
         setHasOptionsMenu(true)
 
 
-        return view
+        return binding.root
+    }
+///////////////////////
+// OVERRIDE METHODS  //
+///////////////////////
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewModel.readAllData.map {
+                recipe ->
+            ListAdapter().setData(recipe)
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -79,5 +85,4 @@ class ListFragment : Fragment() {
         builder.create().show()
 
     }
-
 }

@@ -12,12 +12,14 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.recipelist.R
 import com.example.recipelist.data.model.Recipe
+import com.example.recipelist.databinding.FragmentAddBinding
+import com.example.recipelist.databinding.FragmentListBinding
 import com.example.recipelist.viewmodel.RecipeViewModel
-import kotlinx.android.synthetic.main.fragment_add.*
-import kotlinx.android.synthetic.main.fragment_add.view.*
 
 
 class AddFragment : Fragment() {
+
+    private lateinit var binding: FragmentAddBinding
 
     private lateinit var mRecipeViewModel: RecipeViewModel
 
@@ -26,11 +28,11 @@ class AddFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_add, container, false)
+        binding = FragmentAddBinding.inflate(inflater, container, false)
 
         mRecipeViewModel = ViewModelProvider(this).get(RecipeViewModel::class.java)
 
-        view.add_btn.setOnClickListener {
+        binding.addBtn.setOnClickListener {
             insertDataToDatabase()
         }
 
@@ -38,21 +40,21 @@ class AddFragment : Fragment() {
     }
 
     private fun insertDataToDatabase() {
-        val firstName = addFirstName_et.text.toString()
-        val lastName = addLastName_et.text.toString()
-        val age = addAge_et.text
+//        val firstName = addFirstName_et.text.toString()
+//        val lastName = addLastName_et.text.toString()
+//        val age = addAge_et.text
 
-        if (inputCheck(firstName, lastName, age)) {
-            // Create Recipe object
-            val Recipe = Recipe(0, firstName, lastName, Integer.parseInt(age.toString()))
-            // Add data to Database
-            mRecipeViewModel.addRecipe(Recipe)
-            Toast.makeText(requireContext(), "Successfully added!", Toast.LENGTH_LONG).show()
-            // Navigate back
-            findNavController().navigate(R.id.action_addFragment_to_listFragment)
-        } else {
-            Toast.makeText(requireContext(), "Please fill out all fields.", Toast.LENGTH_LONG).show()
-        }
+//        if (inputCheck(firstName, lastName, age)) {
+//            // Create Recipe object
+//            val Recipe = Recipe(0, firstName, lastName, Integer.parseInt(age.toString()))
+//            // Add data to Database
+//            mRecipeViewModel.addRecipe(Recipe)
+//            Toast.makeText(requireContext(), "Successfully added!", Toast.LENGTH_LONG).show()
+//            // Navigate back
+//            findNavController().navigate(R.id.action_addFragment_to_listFragment)
+//        } else {
+//            Toast.makeText(requireContext(), "Please fill out all fields.", Toast.LENGTH_LONG).show()
+//        }
 
     }
 

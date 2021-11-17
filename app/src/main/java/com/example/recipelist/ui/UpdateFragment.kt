@@ -10,50 +10,47 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-//import androidx.navigation.fragment.findNavController
-//import androidx.navigation.fragment.navArgs
 import com.example.recipelist.R
 import com.example.recipelist.data.model.Recipe
+import com.example.recipelist.databinding.FragmentUpdateBinding
 import com.example.recipelist.viewmodel.RecipeViewModel
-import kotlinx.android.synthetic.main.fragment_update.*
-import kotlinx.android.synthetic.main.fragment_update.view.*
+
 
 
 class UpdateFragment : Fragment() {
 
+    private lateinit var binding: FragmentUpdateBinding
     private val args by navArgs<UpdateFragmentArgs>()
     private lateinit var mRecipeViewModel: RecipeViewModel
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_update, container, false)
+        binding = FragmentUpdateBinding.inflate(inflater, container, false)
 
         mRecipeViewModel = ViewModelProvider(this).get(RecipeViewModel::class.java)
 
-        view.updateFirstName_et.setText(args.currentRecipe.firstName)
-        view.updateLastName_et.setText(args.currentRecipe.lastName)
-        view.updateAge_et.setText(args.currentRecipe.age.toString())
-
-        view.update_btn.setOnClickListener {
-            updateItem()
+        binding.apply {
+//            updateFirstNameEt = args.currentRecipe.firstName
+//            updateLastNameEt = args.currentRecipe.lastName
+//            updateAgeEt = args.currentRecipe.age
+            updateBtn.setOnClickListener {
+                updateItem()
+            }
         }
 
-        // Add menu
         setHasOptionsMenu(true)
-
-        return view
+        return binding.root
     }
 
     private fun updateItem() {
-        val firstName = updateFirstName_et.text.toString()
-        val lastName = updateLastName_et.text.toString()
-        val age = Integer.parseInt(updateAge_et.text.toString())
+        val firstName = binding.updateFirstNameEt.text.toString()
+        val lastName = binding.updateLastNameEt.text.toString()
+        val age = binding.updateAgeEt.text
 
-        if (inputCheck(firstName, lastName, updateAge_et.text)) {
+        if (inputCheck(firstName, lastName, age)) {
             // Create Recipe Object
-            val updatedRecipe = Recipe(args.currentRecipe.id, firstName, lastName, age)
+            val updatedRecipe = Recipe(args.currentRecipe.id, firstName, lastName, age.toString())
             // Update Current Recipe
             mRecipeViewModel.updateRecipe(updatedRecipe)
             // Navigate Back
