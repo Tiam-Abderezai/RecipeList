@@ -12,7 +12,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        supportActionBar?.hide()
+//        supportActionBar?.hide()
         Log.d(TAG_ACT_MAIN, "onCreate: ")
 //        Logger.logd(TAG_ACT_MAIN, "onCreate")
     }
