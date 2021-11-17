@@ -50,11 +50,17 @@ class AddFragment : Fragment() {
     private fun insertDataToDatabase() {
         val name = et_add_name.text.toString()
         val description = et_add_description.text.toString()
-//        val age = addAge_et.text
-
+        val ingredients = listOf(
+            binding.etAddIngredient1.text.toString(),
+            binding.etAddIngredient2.text.toString(),
+            binding.etAddIngredient3.text.toString(),
+            binding.etAddIngredient4.text.toString(),
+            binding.etAddIngredient5.text.toString()
+        )
         if (inputCheck(name, description)) {
+
             // Create Recipe object
-            val recipe = Recipe(0, name, description)
+            val recipe = Recipe(0, name, description, ingredients)
             // Add data to Database
             viewModel.addRecipe(recipe)
             Toast.makeText(requireContext(), "Successfully added!", Toast.LENGTH_LONG).show()

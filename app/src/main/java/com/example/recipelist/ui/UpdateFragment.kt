@@ -23,7 +23,6 @@ import com.example.recipelist.utils.Logger
 import com.example.recipelist.viewmodel.RecipeViewModel
 
 
-
 class UpdateFragment : Fragment() {
 
     private lateinit var binding: FragmentUpdateBinding
@@ -41,10 +40,16 @@ class UpdateFragment : Fragment() {
         binding.apply {
             etUpdateName.setText(args.currentRecipe.name)
             etUpdateDescription.setText(args.currentRecipe.description)
+            etUpdateIngredient1.setText(args.currentRecipe.ingredients[0])
+            etUpdateIngredient2.setText(args.currentRecipe.ingredients[1])
+            etUpdateIngredient3.setText(args.currentRecipe.ingredients[2])
+            etUpdateIngredient4.setText(args.currentRecipe.ingredients[3])
+            etUpdateIngredient5.setText(args.currentRecipe.ingredients[4])
             updateBtn.setOnClickListener {
                 updateItem()
             }
         }
+
         setHasOptionsMenu(true)
         Log.d(TAG_FRAG_ADD, "onCreateView: ")
 //        Logger.logd(TAG_FRAG_UPDATE, "onCreateView")
@@ -55,14 +60,16 @@ class UpdateFragment : Fragment() {
     private fun updateItem() {
         val name = binding.etUpdateName.text.toString()
         val description = binding.etUpdateDescription.text.toString()
-//        val ingredients = binding.
-//
+        val ingredients = listOf(
+            binding.etUpdateIngredient1.text.toString(),
+            binding.etUpdateIngredient2.text.toString(),
+            binding.etUpdateIngredient3.text.toString(),
+            binding.etUpdateIngredient4.text.toString(),
+            binding.etUpdateIngredient5.text.toString()
+        )
         if (inputCheck(name, description)) {
-//             Create Recipe Object
-            val updatedRecipe = Recipe(args.currentRecipe.id, name, description)
-//             Update Current Recipe
+            val updatedRecipe = Recipe(args.currentRecipe.id, name, description, ingredients)
             viewModel.updateRecipe(updatedRecipe)
-//             Navigate Back
             findNavController().navigate(R.id.action_updateFragment_to_listFragment)
             Toast.makeText(requireContext(), "Updated Successfully!", Toast.LENGTH_SHORT).show()
         } else {
@@ -71,7 +78,8 @@ class UpdateFragment : Fragment() {
         }
     }
 
-    private fun inputCheck(name: String, description: String) = !(TextUtils.isEmpty(name) && TextUtils.isEmpty(description))
+    private fun inputCheck(name: String, description: String) =
+        !(TextUtils.isEmpty(name) && TextUtils.isEmpty(description))
 
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -94,7 +102,7 @@ class UpdateFragment : Fragment() {
                 "Successfully removed: ${args.currentRecipe.name}",
                 Toast.LENGTH_SHORT
             ).show()
-        findNavController().navigate(R.id.action_updateFragment_to_listFragment)
+            findNavController().navigate(R.id.action_updateFragment_to_listFragment)
         }
         builder.setNegativeButton("No") { _, _ ->
 
