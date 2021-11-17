@@ -13,6 +13,10 @@ import androidx.navigation.fragment.navArgs
 import com.example.recipelist.R
 import com.example.recipelist.data.model.Recipe
 import com.example.recipelist.databinding.FragmentUpdateBinding
+import com.example.recipelist.utils.Globals
+import com.example.recipelist.utils.Globals.Companion.TAG_FRAG_ADD
+import com.example.recipelist.utils.Globals.Companion.TAG_FRAG_UPDATE
+import com.example.recipelist.utils.Logger
 import com.example.recipelist.viewmodel.RecipeViewModel
 
 
@@ -40,6 +44,9 @@ class UpdateFragment : Fragment() {
         }
 
         setHasOptionsMenu(true)
+
+        Logger.logd(TAG_FRAG_UPDATE, "onCreateView")
+
         return binding.root
     }
 

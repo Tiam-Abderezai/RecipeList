@@ -9,12 +9,16 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.recipelist.ui.adapter.ListAdapter
 import com.example.recipelist.viewmodel.RecipeViewModel
 import com.example.recipelist.R
 import com.example.recipelist.data.model.Recipe
 import com.example.recipelist.databinding.FragmentListBinding
+import com.example.recipelist.utils.Globals
+import com.example.recipelist.utils.Globals.Companion.TAG_FRAG_LIST
+import com.example.recipelist.utils.Logger
 import kotlinx.coroutines.flow.map
 
 class ListFragment : Fragment() {
@@ -30,7 +34,11 @@ class ListFragment : Fragment() {
         binding.recyclerView.apply {
             adapter = ListAdapter()
             layoutManager = LinearLayoutManager(requireContext())
+            binding.addNewRecipe.setOnClickListener {
+                findNavController().navigate(R.id.action_listFragment_to_addFragment)
+            }
         }
+
         // RecipeViewModel
 //        mRecipeViewModel = ViewModelProvider(this).get(RecipeViewModel::class.java)
 //        mRecipeViewModel.readAllData.observe(viewLifecycleOwner, Observer { Recipe ->
@@ -41,6 +49,7 @@ class ListFragment : Fragment() {
         // Add menu
         setHasOptionsMenu(true)
 
+        Logger.logd(TAG_FRAG_LIST, "onCreateView")
 
         return binding.root
     }

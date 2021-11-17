@@ -14,6 +14,9 @@ import com.example.recipelist.R
 import com.example.recipelist.data.model.Recipe
 import com.example.recipelist.databinding.FragmentAddBinding
 import com.example.recipelist.databinding.FragmentListBinding
+import com.example.recipelist.utils.Globals
+import com.example.recipelist.utils.Globals.Companion.TAG_FRAG_ADD
+import com.example.recipelist.utils.Logger
 import com.example.recipelist.viewmodel.RecipeViewModel
 
 
@@ -35,6 +38,7 @@ class AddFragment : Fragment() {
         binding.addBtn.setOnClickListener {
             insertDataToDatabase()
         }
+        Logger.logd(TAG_FRAG_ADD, "onCreateView")
 
         return view
     }
