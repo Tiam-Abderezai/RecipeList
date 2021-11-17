@@ -1,5 +1,6 @@
 package com.example.recipelist.ui.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,11 +9,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.recipelist.R
 import com.example.recipelist.ui.ListFragmentDirections
 import com.example.recipelist.data.model.Recipe
+import com.example.recipelist.utils.Globals.Companion.TAG_ADAP_LIST
+import kotlinx.android.synthetic.main.recipe_item.view.*
 
 
-class ListAdapter : RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
-
-    private var recipeList = emptyList<Recipe>()
+class ListAdapter(
+    private val recipes: List<Recipe>
+) : RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {}
 
@@ -23,24 +26,19 @@ class ListAdapter : RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
     }
 
     override fun getItemCount(): Int {
-        return recipeList.size
+        return recipes.size
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val currentItem = recipeList[position]
-//        holder.itemView.id_txt.text = currentItem.id.toString()
-//        holder.itemView.firstName_txt.text = currentItem.firstName
-//        holder.itemView.lastName_txt.text = currentItem.lastName
-//        holder.itemView.age_txt.text = currentItem.age.toString()
-
-//        holder.itemView.rowLayout.setOnClickListener {
-//            val action = ListFragmentDirections.actionListFragmentToUpdateFragment(currentItem)
-//            holder.itemView.findNavController().navigate(action)
-//        }
-    }
-
-    fun setData(Recipe: List<Recipe>) {
-        this.recipeList = Recipe
-        notifyDataSetChanged()
+        val currentItem = recipes[position]
+        Log.d(TAG_ADAP_LIST, "onBindViewHolder: $currentItem")
+        holder.itemView.tv_item_id.text = currentItem.id.toString()
+        holder.itemView.tv_item_name.text = currentItem.name
+        holder.itemView.tv_item_description.text = currentItem.description
+//
+        holder.itemView.setOnClickListener {
+            val action = ListFragmentDirections.actionListFragmentToUpdateFragment(currentItem)
+            holder.itemView.findNavController().navigate(action)
+        }
     }
 }

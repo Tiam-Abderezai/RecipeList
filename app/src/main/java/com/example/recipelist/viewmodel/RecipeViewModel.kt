@@ -1,47 +1,49 @@
 package com.example.recipelist.viewmodel
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.example.recipelist.data.model.Recipe
 import com.example.recipelist.data.repo.RecipeRepository
-import com.example.recipelist.data.RecipeDatabase
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
+import java.lang.IllegalArgumentException
 
-class RecipeViewModel(application: Application) : AndroidViewModel(application) {
+class RecipeViewModel(
+    private val recipeRepo: RecipeRepository
+) : ViewModel()  {
 
-    val readAllData: Flow<List<Recipe>>
-    private val repository: RecipeRepository
-
-    init {
-        val recipeDao = RecipeDatabase.getDatabase(application).recipeDao()
-        repository = RecipeRepository(recipeDao)
-        readAllData = repository.readAllData
-    }
+        val recipes = recipeRepo.readAllData().asLiveData(viewModelScope.coroutineContext + Dispatchers.Default)
 
     fun addRecipe(recipe: Recipe) {
         viewModelScope.launch(Dispatchers.IO) {
-            repository.addRecipe(recipe)
+            recipeRepo.addRecipe(recipe)
         }
     }
 
     fun updateRecipe(recipe: Recipe) {
         viewModelScope.launch(Dispatchers.IO) {
-            repository.updateRecipe(recipe)
+            recipeRepo.updateRecipe(recipe)
         }
     }
 
     fun deleteRecipe(recipe: Recipe){
         viewModelScope.launch(Dispatchers.IO){
-            repository.deleteRecipe(recipe)
+            recipeRepo.deleteRecipe(recipe)
         }
     }
     fun deleteAllRecipe(){
         viewModelScope.launch(Dispatchers.IO){
-            repository.deleteAllRecipes()
+            recipeRepo.deleteAllRecipes()
+        }
+    }
+    class Factory(
+        private val contactRepo: RecipeRepository
+    ) : ViewModelProvider.Factory {
+        override fun <T : ViewModel> create(modelClass: Class<T>): T {
+            if (modelClass.isAssignableFrom(RecipeViewModel::class.java)) {
+                return RecipeViewModel(contactRepo) as T
+            } else {
+                throw IllegalArgumentException("Cannot create instance of ContactViewModel")
+            }
         }
     }
 }

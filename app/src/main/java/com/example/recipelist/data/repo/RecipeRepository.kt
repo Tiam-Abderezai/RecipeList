@@ -1,27 +1,33 @@
 package com.example.recipelist.data.repo
 
-import androidx.lifecycle.LiveData
+import android.app.Application
 import com.example.recipelist.data.model.Recipe
-import com.example.recipelist.data.RecipeDao
+import com.example.recipelist.data.RecipeDatabase
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.withContext
 
-class RecipeRepository(private val RecipeDao: RecipeDao) {
-    val readAllData: Flow<List<Recipe>> = RecipeDao.readAllData().flowOn(Dispatchers.IO)
-    suspend fun addRecipe(Recipe: Recipe) {
-        RecipeDao.addRecipe(Recipe)
+
+class RecipeRepository(private val application: Application) {
+    private val recipeDao by lazy {
+        RecipeDatabase.getDatabase(application).recipeDao()
     }
 
-    suspend fun updateRecipe(Recipe: Recipe) {
-        RecipeDao.updateRecipe(Recipe)
+    fun readAllData() = recipeDao.readAllData().flowOn(Dispatchers.IO)
+
+    suspend fun addRecipe(recipe: Recipe) {
+        recipeDao.addRecipe(recipe)
     }
 
-    suspend fun deleteRecipe(Recipe: Recipe) {
-        RecipeDao.deleteRecipe(Recipe)
+    suspend fun updateRecipe(recipe: Recipe) {
+        recipeDao.updateRecipe(recipe)
+    }
+
+    suspend fun deleteRecipe(recipe: Recipe) {
+        recipeDao.deleteRecipe(recipe)
     }
 
     suspend fun deleteAllRecipes() {
-        RecipeDao.deleteAllRecipes()
+        recipeDao.deleteAllRecipes()
     }
 }

@@ -7,6 +7,7 @@ class Globals {
         const val TAG_FRAG_LIST = "ListFragment"
         const val TAG_FRAG_ADD = "AddFragment"
         const val TAG_FRAG_UPDATE = "UpdateFragment"
+        const val TAG_ADAP_LIST = "ListAdapter"
     }
 
     enum class Tags {

@@ -8,53 +8,163 @@
     android:background="@color/teal_700"
     tools:context=".ui.AddFragment">
 
-    <EditText
-        android:id="@+id/addFirstName_et"
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_recipe"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="64dp"
         android:ems="10"
-        android:hint="First Name"
-        android:inputType="textPersonName"
+        android:textAlignment="center"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        android:hint="Recipe"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/et_add_name"
+        />
 
-    <EditText
-        android:id="@+id/addLastName_et"
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/et_add_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:ems="10"
-        android:hint="Last Name"
-        android:inputType="textPersonName"
+        android:hint="Name"
+        android:textAlignment="center"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:inputType="textAutoCorrect"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addFirstName_et" />
+        app:layout_constraintTop_toBottomOf="@id/tv_recipe" />
 
-    <EditText
-        android:id="@+id/addAge_et"
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/et_add_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:ems="10"
-        android:hint="Age"
+        android:hint="Description"
+        android:textAlignment="center"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:inputType="textAutoCorrect"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_add_name" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_ingredients"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:textAlignment="center"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        android:hint="Ingredients"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/et_add_description"
+        app:layout_constraintBottom_toTopOf="@id/et_add_ingredient1"
+        />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/et_add_ingredient1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:textAlignment="center"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:hint="1."
         android:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addLastName_et" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_ingredients" />
 
-    <Button
-        android:id="@+id/add_btn"
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/et_add_ingredient2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="Add"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:hint="2."
+        android:textAlignment="center"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:inputType="textAutoCorrect"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addAge_et" />
+        app:layout_constraintTop_toBottomOf="@+id/et_add_ingredient1" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/et_add_ingredient3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:hint="3."
+        android:inputType="textAutoCorrect"
+        android:textAlignment="center"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_add_ingredient2" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/et_add_ingredient4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:hint="4."
+        android:textAlignment="center"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:inputType="textAutoCorrect"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_add_ingredient3" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/et_add_ingredient5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:hint="5."
+        android:textAlignment="center"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:inputType="textAutoCorrect"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_add_ingredient4" />
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/add_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="+"
+        android:textAlignment="center"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_add_ingredient4" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

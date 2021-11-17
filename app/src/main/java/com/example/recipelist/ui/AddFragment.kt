@@ -9,32 +9,34 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.recipelist.R
 import com.example.recipelist.data.model.Recipe
+import com.example.recipelist.data.repo.RecipeRepository
 import com.example.recipelist.databinding.FragmentAddBinding
 import com.example.recipelist.databinding.FragmentListBinding
 import com.example.recipelist.utils.Globals
 import com.example.recipelist.utils.Globals.Companion.TAG_FRAG_ADD
 import com.example.recipelist.utils.Logger
 import com.example.recipelist.viewmodel.RecipeViewModel
+import kotlinx.android.synthetic.main.fragment_add.*
 
 
 class AddFragment : Fragment() {
 
     private lateinit var binding: FragmentAddBinding
 
-    private lateinit var mRecipeViewModel: RecipeViewModel
-
+    private val viewModel: RecipeViewModel by viewModels {
+        RecipeViewModel.Factory(RecipeRepository(requireActivity().application))
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentAddBinding.inflate(inflater, container, false)
-
-        mRecipeViewModel = ViewModelProvider(this).get(RecipeViewModel::class.java)
 
         binding.addBtn.setOnClickListener {
             insertDataToDatabase()
@@ -46,26 +48,26 @@ class AddFragment : Fragment() {
     }
 
     private fun insertDataToDatabase() {
-//        val firstName = addFirstName_et.text.toString()
-//        val lastName = addLastName_et.text.toString()
+        val name = et_add_name.text.toString()
+        val description = et_add_description.text.toString()
 //        val age = addAge_et.text
 
-//        if (inputCheck(firstName, lastName, age)) {
-//            // Create Recipe object
-//            val Recipe = Recipe(0, firstName, lastName, Integer.parseInt(age.toString()))
-//            // Add data to Database
-//            mRecipeViewModel.addRecipe(Recipe)
-//            Toast.makeText(requireContext(), "Successfully added!", Toast.LENGTH_LONG).show()
-//            // Navigate back
-//            findNavController().navigate(R.id.action_addFragment_to_listFragment)
-//        } else {
-//            Toast.makeText(requireContext(), "Please fill out all fields.", Toast.LENGTH_LONG).show()
-//        }
+        if (inputCheck(name, description)) {
+            // Create Recipe object
+            val recipe = Recipe(0, name, description)
+            // Add data to Database
+            viewModel.addRecipe(recipe)
+            Toast.makeText(requireContext(), "Successfully added!", Toast.LENGTH_LONG).show()
+            // Navigate back
+            findNavController().navigate(R.id.action_addFragment_to_listFragment)
+        } else {
+            Toast.makeText(requireContext(), "Please fill out all fields.", Toast.LENGTH_LONG).show()
+        }
 
     }
 
-    private fun inputCheck(firstName: String, lastName: String, age: Editable): Boolean {
-        return !(TextUtils.isEmpty(firstName) && TextUtils.isEmpty(lastName) && age.isEmpty())
+    private fun inputCheck(name: String, description: String): Boolean {
+        return !(TextUtils.isEmpty(name) && TextUtils.isEmpty(description))
     }
 
 }
