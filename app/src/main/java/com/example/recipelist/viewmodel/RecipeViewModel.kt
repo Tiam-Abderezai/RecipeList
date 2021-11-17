@@ -30,7 +30,7 @@ class RecipeViewModel(
             recipeRepo.deleteRecipe(recipe)
         }
     }
-    fun deleteAllRecipe(){
+    fun deleteAllRecipes(){
         viewModelScope.launch(Dispatchers.IO){
             recipeRepo.deleteAllRecipes()
         }

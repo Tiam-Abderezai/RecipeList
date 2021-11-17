@@ -73,6 +73,7 @@ class ListFragment : Fragment() {
     private fun deleteAllRecipes() {
         val builder = AlertDialog.Builder(requireContext())
         builder.setPositiveButton("Yes") { _, _ ->
+            viewModel.deleteAllRecipes()
             Toast.makeText(
                 requireContext(),
                 "Successfully removed everything",
