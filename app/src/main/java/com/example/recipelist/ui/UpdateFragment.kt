@@ -39,16 +39,13 @@ class UpdateFragment : Fragment() {
         binding = FragmentUpdateBinding.inflate(inflater, container, false)
 
         binding.apply {
-//            updatenameEt = args.currentRecipe.name
-//            updatedescriptionEt = args.currentRecipe.description
-//            updateAgeEt = args.currentRecipe.age
+            etUpdateName.setText(args.currentRecipe.name)
+            etUpdateDescription.setText(args.currentRecipe.description)
             updateBtn.setOnClickListener {
                 updateItem()
             }
         }
-
         setHasOptionsMenu(true)
-
         Log.d(TAG_FRAG_ADD, "onCreateView: ")
 //        Logger.logd(TAG_FRAG_UPDATE, "onCreateView")
 
@@ -56,23 +53,22 @@ class UpdateFragment : Fragment() {
     }
 
     private fun updateItem() {
-//        val name = binding.updatenameEt.text.toString()
-//        val description = binding.updatedescriptionEt.text.toString()
+        val name = binding.etUpdateName.text.toString()
+        val description = binding.etUpdateDescription.text.toString()
 //        val ingredients = binding.
-
-//        if (inputCheck(name, description)) {
+//
+        if (inputCheck(name, description)) {
 //             Create Recipe Object
-//            val updatedRecipe = Recipe(args.currentRecipe.id, name, description)
+            val updatedRecipe = Recipe(args.currentRecipe.id, name, description)
 //             Update Current Recipe
-//            mRecipeViewModel.updateRecipe(updatedRecipe)
+            viewModel.updateRecipe(updatedRecipe)
 //             Navigate Back
-//            findNavController().navigate(R.id.action_updateFragment_to_listFragment)
-//            Toast.makeText(requireContext(), "Updated Successfully!", Toast.LENGTH_SHORT).show()
-//        } else {
-//            Toast.makeText(requireContext(), "Please fill out all fields", Toast.LENGTH_SHORT)
-//                .show()
-//        }
-
+            findNavController().navigate(R.id.action_updateFragment_to_listFragment)
+            Toast.makeText(requireContext(), "Updated Successfully!", Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(requireContext(), "Please fill out all fields", Toast.LENGTH_SHORT)
+                .show()
+        }
     }
 
     private fun inputCheck(name: String, description: String) = !(TextUtils.isEmpty(name) && TextUtils.isEmpty(description))
